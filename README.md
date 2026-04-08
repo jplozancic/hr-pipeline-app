@@ -56,13 +56,15 @@ src/
 │   ├── ui/
 │   └── shared/
 ├── core/                 # Centralna arhiva aplikacijske domene - globalni Typeovi i Zod modeli
+│   ├── schemas/
+│   └── types/
 ├── features/             # Kontejner feature direktorija. Ovdje je smješten glavni paket.
 │   └── candidates/       # Paket 'kadidata'
 │       ├── api/          # React Query hookovi za spajanje sa vanjskim svijetom i API service sloj
 │       ├── components/   # UI Komponente rezervirane eksplicitno samo za feature listanja/detalja
-│       ├── hooks/        # Domenski specifični React utility hookovi (forme, URL state, unsaved prevention)
 │       │   ├── list/
 │       │   └── details/
+│       ├── hooks/        # Domenski specifični React utility hookovi (forme, URL state, unsaved prevention)
 │       ├── schemas/      # Lokalni Zod obrasci (status forme, follow up taskovi)
 │       ├── types/        # TypeScript sučelja specifična za liste kandidata
 │       └── utils/        # Specifične helper funkcije, uključujući mock filtere i sort
