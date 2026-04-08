@@ -128,19 +128,22 @@ Testovi pokrivaju pozitivne i negativne scenarije, uključujući obavezna polja,
 
 ## Ključne tehničke odluke
 
-### 1. Feature-based arhitektura
+### 1. Odabir Vite build tool-a
+Odabrao sam Vite kao build tool jer zadatak eksplicitno navodi da backend nije potreban i da podaci dolaze iz lokalnog mock JSON fajla. Vite nudi brži development server i lakši setup u usporedbi s drugim build tool-ovima, bez nepotrebne složenosti SSR-a koje u ovom projektu ne bi bilo iskorišteno. Time je fokus ostao na samoj frontend logici i business pravilima.
+
+### 2. Feature-based arhitektura
 Projekt je organiziran po featureima, a ne samo po tehničkim slojevima. Na taj način su komponente, hookovi, query logika, schemas i pomoćne funkcije vezane za domenu kandidata smještene na jednom mjestu, što olakšava održavanje i daljnji razvoj.
 
-### 2. Service layer iznad lokalnog mock JSON-a
+### 3. Service layer iznad lokalnog mock JSON-a
 Iako podaci dolaze iz lokalnog JSON fajla, UI ne radi direktno nad tim fajlom. Uveden je service layer koji simulira async backend pozive. Time je prezentacijski sloj odvojen od izvora podataka, a prelazak na stvarni API u budućnosti postaje jednostavniji.
 
-### 3. TanStack Query za upravljanje server-stateom
+### 4. TanStack Query za upravljanje server-stateom
 Podaci o kandidatima tretirani su kao server-state. TanStack Query se koristi za dohvat, cacheiranje, invalidaciju i mutacije. Time su loading i error stanja konzistentna, a osvježavanje podataka nakon izmjena predvidljivo.
 
-### 4. React Hook Form + Zod
+### 5. React Hook Form + Zod
 Forme su implementirane pomoću React Hook Form biblioteke, dok je validacija izdvojena u Zod sheme. Time su business pravila validacije odvojena od prikaza i interakcijske logike.
 
-### 5. Separation of concerns
+### 6. Separation of concerns
 Kod je podijeljen tako da:
 - komponente primarno renderiraju UI
 - hookovi upravljaju interakcijom, form stateom i mutacijama
@@ -148,10 +151,10 @@ Kod je podijeljen tako da:
 - utility fajlovi sadrže čiste pomoćne funkcije
 - api/service sloj upravlja dohvatom i izmjenom podataka
 
-### 6. URL kao izvor stanja za listu
+### 7. URL kao izvor stanja za listu
 Filteri, sortiranje i paginacija liste zamišljeni su tako da budu kompatibilni s URL parametrima. Time se čuva korisnički kontekst prilikom navigacije između liste i detail stranice.
 
-### 7. Timeline kao eksplicitni zapis aktivnosti
+### 8. Timeline kao eksplicitni zapis aktivnosti
 Timeline je modeliran kroz zasebne `timelineEvents` zapise, umjesto da se kompletna povijest pokušava rekonstruirati isključivo iz notes i follow-up podataka. Na taj način pipeline događaji ostaju eksplicitni i jasni. Istovremeno se na kandidatu vodi i `lastActivityAt` kao denormalizirano polje zbog efikasnog sortiranja liste.
 
 ## Pretpostavke
